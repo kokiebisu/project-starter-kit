@@ -17,7 +17,7 @@
   },
   "runArgs": [
     "--name",
-    "kakuyo-ai",
+    "project-starter-kit",
     "--dns",
     "8.8.8.8",
     "--dns",
@@ -47,9 +47,6 @@
       "installDockerComposeSwitch": true,
       "version": "latest",
       "dockerDashComposeVersion": "none"
-    },
-    "ghcr.io/devcontainers/features/terraform:1": {
-      "version": "1.10.3"
     },
     "ghcr.io/devcontainers/features/aws-cli:1": {
       "version": "latest"
