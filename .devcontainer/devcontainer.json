@@ -1,0 +1,59 @@
+{
+  "name": "home",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/node/.aws,type=bind,readonly,consistency=cached",
+    "source=${localWorkspaceFolder}/scripts/devcontainer/load.sh,target=/root/.zshrc,type=bind,readonly,consistency=cached",
+    "source=${localWorkspaceFolder}/scripts/devcontainer/workspace.sh,target=/root/workspace.sh,type=bind,readonly,consistency=cached",
+    "source=${localWorkspaceFolder}/config/ngrok.yml,target=/home/node/.config/ngrok/ngrok.yml,type=bind,readonly,consistency=cached"
+  ],
+  "remoteEnv": {
+    "AWS_ACCESS_KEY_ID": "${localEnv:AWS_ACCESS_KEY_ID}",
+    "AWS_SECRET_ACCESS_KEY": "${localEnv:AWS_SECRET_ACCESS_KEY}",
+    "AWS_REGION": "${localEnv:AWS_REGION}"
+  },
+  "runArgs": [
+    "--name",
+    "kakuyo-ai",
+    "--dns",
+    "8.8.8.8",
+    "--dns",
+    "8.8.4.4"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "rvest.vs-code-prettier-eslint",
+        "eamodio.gitlens",
+        "HashiCorp.terraform"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "eslint.enable": true
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/ghcr.io/devcontainers-extra/features/tmux-apt-get:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": true,
+      "installDockerBuildx": true,
+      "installDockerComposeSwitch": true,
+      "version": "latest",
+      "dockerDashComposeVersion": "none"
+    },
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "1.10.3"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers-extra/features/npm-package:1": {}
+  }
+}
